@@ -152,6 +152,12 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
         </fieldset>
     </div>
     
+    <div class="container-fluid">
+    <h3>Appointment Details</h3>
+    <%=Appointments.AppoinmentList() %>
+    
+    </div>
+    
 
 </body>
 </html>

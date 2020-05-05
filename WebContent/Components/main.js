@@ -13,12 +13,11 @@ $(document).ready(function() {
 
 
 
-
-
-
 	// variables for validations
 	let valAppNo = true;
 	let valNic = true;
+	let valDate = true;
+	let valAge = true;
 	
 	//check number of characters for app_no
 	$("#appno").focusout(function(){
@@ -31,6 +30,22 @@ $(document).ready(function() {
 	$("#nic").focusout(function() {
 		vNic = checkNic();
 	});
+	
+//	//check number of characters for app_no
+//	$("#app_date").focusout(function(){
+//		valDate = checkDate();
+///		
+//	});
+	
+	//check number of characters for app_no
+	$("#age").focusout(function(){
+		valAge = checkAge();
+		
+	});
+	
+	
+	
+	
 	
 	
 	// check empty text fields
@@ -76,7 +91,27 @@ function checkNic() {
 	}
 }
 
+//=======Age validation=========
 
+$(function() {
+    $('#add-button').bind('click', function(){
+	//let ageLength = $("#age").val().length;
+        var age =  $('#age').val(); //var age = parseInt($(this).val(), 10);
+    if(age < 18 || age > 65) {
+    	$("#age_error").hide();
+    	return true;
+    }
+    	else {
+    		$("#age_error").html("Invalid Age!");
+    		$("#age_error").show();
+    		return false;
+    }
+        //alert("Wrong age!");
+    
+   //   else 
+});  //   	alert("valid age!");
+
+//==========Date validation============    
 
 $(function() {
     $('#add-button').bind('click', function(){
@@ -123,7 +158,7 @@ function isDate(txtDate)
 
 
 	
-	// app_no is required field
+//=============app_no is required field==============
 	function appnoRequired() {
 		if ($("#appno").val().trim() == "") {
 			$("#app_no_error").html("This field is required");
@@ -132,7 +167,7 @@ function isDate(txtDate)
 		}
 	}
 	
-	// nic is required field
+// ==============nic is required field=================
 	function nicRequired() {
 		if ($("#nic").val().trim() == "") {
 			$("#nic_error").html("This field is required");
@@ -141,7 +176,7 @@ function isDate(txtDate)
 		}
 	}
 
-	// first name is required field
+//========= first name is required field================
 	function fNameRequired() {
 		if ($("#first-Name").val().trim() == "") {
 			$("#fName_error").html("This field is required");
@@ -213,7 +248,5 @@ function isDate(txtDate)
 		}
 	}
 	
-	// git commit
-	
-	// git commit2
+});
 
