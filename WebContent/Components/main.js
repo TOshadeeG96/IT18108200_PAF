@@ -119,28 +119,28 @@ $(document).ready(function() {
 	}
 	
 	// nic is required field
-	function nicRequired() {
-		if ($("#nic").val().trim() == "") {
-			$("#nic_error").html("This field is required");
-			$("#nic_error").show();
+	function app_dateRequired() {
+		if ($("#app_date").val().trim() == "") {
+			$("#app_date_error").html("This field is required");
+			$("#app_date_error").show();
 			return false;
 		}
 	}
 	
 	// nic is required field
-	function nicRequired() {
-		if ($("#nic").val().trim() == "") {
-			$("#nic_error").html("This field is required");
-			$("#nic_error").show();
+	function app_timeRequired() {
+		if ($("#app_time").val().trim() == "") {
+			$("#app_time_error").html("This field is required");
+			$("#app_time_error").show();
 			return false;
 		}
 	}
 	
 	// nic is required field
-	function nicRequired() {
-		if ($("#nic").val().trim() == "") {
-			$("#nic_error").html("This field is required");
-			$("#nic_error").show();
+	function reasonRequired() {
+		if ($("#reason").val().trim() == "") {
+			$("#reason_error").html("This field is required");
+			$("#reason_error").show();
 			return false;
 		}
 	}
