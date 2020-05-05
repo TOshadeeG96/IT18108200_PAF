@@ -118,7 +118,7 @@ $(document).ready(function() {
 		}
 	}
 	
-	// nic is required field
+	// app_date is required field
 	function app_dateRequired() {
 		if ($("#app_date").val().trim() == "") {
 			$("#app_date_error").html("This field is required");
@@ -127,7 +127,7 @@ $(document).ready(function() {
 		}
 	}
 	
-	// nic is required field
+	// app_time is required field
 	function app_timeRequired() {
 		if ($("#app_time").val().trim() == "") {
 			$("#app_time_error").html("This field is required");
@@ -136,7 +136,7 @@ $(document).ready(function() {
 		}
 	}
 	
-	// nic is required field
+	// reason is required field
 	function reasonRequired() {
 		if ($("#reason").val().trim() == "") {
 			$("#reason_error").html("This field is required");
@@ -145,11 +145,11 @@ $(document).ready(function() {
 		}
 	}
 	
-	// nic is required field
-	function nicRequired() {
-		if ($("#nic").val().trim() == "") {
-			$("#nic_error").html("This field is required");
-			$("#nic_error").show();
+	// ref_doc is required field
+	function ref_docRequired() {
+		if ($("#ref_doc").val().trim() == "") {
+			$("#ref_doc_error").html("This field is required");
+			$("#ref_doc_error").show();
 			return false;
 		}
 	}
