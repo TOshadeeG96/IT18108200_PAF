@@ -1,102 +1,125 @@
 $(document).ready(function() { 
-$("#alertSuccess").hide();  
-$("#alertError").hide(); 
+	// hide area of error messages
+	$("#app_no_error").hide();
+	$("#nic_error").hide();
+	$("#fName_error").hide();
+	$("#lName_error").hide();
+	$("#age_error").hide();
+	$("#gender_error").hide();
+	$("#app_date_error").hide();
+	$("#app_time_error").hide();
+	$("#reason_error").hide();
+	$("#refd_error").hide();
 });
 
 
-// SAVE ============================================
-$(document).on("click", "#btnSave", function(event)
-{
-// Clear status msges-------------
- $("#alertSuccess").text("");
- $("#alertSuccess").hide();
- $("#alertError").text("");
- $("#alertError").hide();
- 
- 
-// Form validation----------------
-var status = validateItemForm();
 
 
-// If not valid-------------------
-if (status != true)
- {
- $("#alertError").text(status);
- $("#alertError").show();
- return;
- }
 
-
-// If valid-----------------------
-var student = getStudentCard($("#txtName").val().trim(),
- $('input[name="rdoGender"]:checked').val(),
- $("#ddlYear").val());
- $("#colStudents").append(student);
-
- $("#alertSuccess").text("Saved successfully.");
- $("#alertSuccess").show();
-
- $("#formStudent")[0].reset();
-});
-
-//REMOVE========================================== 
-$(document).on("click", ".remove", function(event) {  
-	$(this).closest(".student").remove();    
+	// variables for validations
+	let valAppNo = true;
+	let valNic = true;
 	
-	$("#alertSuccess").text("Removed successfully.");  
-	$("#alertSuccess").show(); 
-	}); 
+	//check number of characters for app_no
+	$("#appno").focusout(function(){
+		valAppNo = checkAppNo();
+		
+	});
+	
+	
+	// check number of characters for nic
+	$("#nic").focusout(function() {
+		vNic = checkNic();
+	});
+	
+	
+	// check empty text fields
+//	$(document).on("click", "#add-button", function(event) {
 
+//		let nicStatus = nicRequired();
+//		let fNameStatus = fNameRequired();
+//		let sNameStatus = sNameRequired();
+//		let dobStatus = dobRequired();
+//		let genderStatus = genderRequied();
+//		let emailStatus = emailRequied();
+//		let passwordStatus = passwordRequied();
+//		let retypePasswordStatus = retypePasswordRequied();
+//
+//		$("#registration-form").submit(function() {
+//			if (nicStatus == false || fNameStatus == false || sNameStatus == false || dobStatus == false
+//					|| genderStatus == false || emailStatus == false || passwordStatus == false || retypePasswordStatus == false) {
+//				return false;
+//			} else if(vNic == false || vEmail == false || vPassword == false || vRetypePassword == false) {
+//				return false;
+//			} else {
+//				return true;
+//			}
+///		});
+//
+///	});
 
-//CLIENT-MODEL================================================================= 
-function validateItemForm() {  
-// NAME  
-	if ($("#txtName").val().trim() == "") 
-	{   
-		return "Insert student name.";  
-	} 
+//});
+	
+	// app_no is required field
+	function appnoRequired() {
+		if ($("#appno").val().trim() == "") {
+			$("#app_no_error").html("This field is required");
+			$("#app_no_error").show();
+			return false;
+		}
+	}
+	
+	// nic is required field
+	function nicRequired() {
+		if ($("#nic").val().trim() == "") {
+			$("#nic_error").html("This field is required");
+			$("#nic_error").show();
+			return false;
+		}
+	}
 
-// GENDER  
-	if ($('input[name="rdoGender"]:checked').length === 0)  
-	{   
-		return "Select gender.";  
-	} 
+	// first name is required field
+	function fNameRequired() {
+		if ($("#first-Name").val().trim() == "") {
+			$("#fName_error").html("This field is required");
+			$("#fName_error").show();
+			return false;
+		}
+	}
 
-// YEAR  
-	if ($("#ddlYear").val() == "0")  
-	{   
-		return "Select year.";  
-	} 
+	// last name is required field
+	function sNameRequired() {
+		if ($("#last-name").val().trim() == "") {
+			$("#lName_error").html("This field is required");
+			$("#lName_error").show();
+			return false;
+		}
+	}
 
-return true; 
-} 
+	// age is required field
+	function dobRequired() {
+		if ($("#age").val().trim() == "") {
+			$("#age_error").html("This field is required");
+			$("#age_error").show();
+			return false;
+		}
+	}
 
-function getStudentCard(name, gender, year) 
-{  
-	var title = (gender == "Male") ? "Mr." : "Ms.";  
-	var yearNumber = ""; 
+	// gender is required field
+	function genderRequied() {
+		if ($('input[name="gender"]:checked').length === 0) {
+			$("#gender_error").html("This field is required");
+			$("#gender_error").show();
+			return false;
+		}
+	}
 
-switch (year) {  
-case "1":   yearNumber = "1st";  
-break;  
-case "2":   yearNumber = "2nd";   
-break;  
-case "3":   yearNumber = "3rd";   
-break;  
-case "4":   yearNumber = "4th";   
-break;  } 
-
-var student = "";  
-student += "<div class=\"student card bg-light m-2\"       " +
-		"style=\"max-width: 10rem; float: left;\">";  
-student += "<div class=\"card-body\">";  
-student += title + " " + name + ",";  
-student += "<br>";  
-student += yearNumber + " year";  
-student += "</div>";  
-student += "<input type=\"button\" value=\"Remove\"         " +
-		"class=\"btn btn-danger remove\">";  
-student += "</div>"; 
-
-return student; 
-} 
+	
+	
+	
+	
+	//Client===================================================================================
+	
+	
+	
+ 
