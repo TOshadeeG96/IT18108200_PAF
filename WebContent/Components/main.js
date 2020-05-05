@@ -10,7 +10,7 @@ $(document).ready(function() {
 	$("#app_time_error").hide();
 	$("#reason_error").hide();
 	$("#refd_error").hide();
-});
+
 
 
 
@@ -34,31 +34,35 @@ $(document).ready(function() {
 	
 	
 	// check empty text fields
-//	$(document).on("click", "#add-button", function(event) {
+	$(document).on("click", "#add-button", function(event) {
 
-//		let nicStatus = nicRequired();
-//		let fNameStatus = fNameRequired();
-//		let sNameStatus = sNameRequired();
-//		let dobStatus = dobRequired();
-//		let genderStatus = genderRequied();
-//		let emailStatus = emailRequied();
-//		let passwordStatus = passwordRequied();
-//		let retypePasswordStatus = retypePasswordRequied();
-//
-//		$("#registration-form").submit(function() {
-//			if (nicStatus == false || fNameStatus == false || sNameStatus == false || dobStatus == false
-//					|| genderStatus == false || emailStatus == false || passwordStatus == false || retypePasswordStatus == false) {
-//				return false;
-//			} else if(vNic == false || vEmail == false || vPassword == false || vRetypePassword == false) {
-//				return false;
-//			} else {
-//				return true;
-//			}
-///		});
-//
-///	});
+		let appnoStatus = appnoRequired();
+		let nicStatus = nicRequired();
+		let fNameStatus = fNameRequired();
+		let lNameStatus = lNameRequired();
+		let ageStatus = ageRequired();
+		let genderStatus = genderRequired();
+		let app_dateStatus = app_dateRequired();
+		let app_timeStatus = app_timeRequired();
+		let reasonStatus = reasonRequired();
+		let ref_docStatus = ref_docRequired();
 
-//});
+		$("#appointments-form").submit(function() {
+			if (appnoStatus == false || nicStatus == false || fNameStatus == false || lNameStatus == false || ageStatus == false
+					|| genderStatus == false || app_dateStatus == false || app_timeStatus == false || reasonStatus == false || ref_docStatus == false) {
+				return false;
+			} else if(valAppNo == false || valNic == false) {
+				return false;
+			} else {
+				return true;
+			}
+		});
+
+	});
+	
+});
+
+
 	
 	// app_no is required field
 	function appnoRequired() {
@@ -118,12 +122,3 @@ $(document).ready(function() {
 	
 	// git commit2
 
-	
-	
-	
-	
-	//Client===================================================================================
-	
-	
-	
- 
