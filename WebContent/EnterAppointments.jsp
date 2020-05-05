@@ -110,7 +110,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
                 <div class="form-group row">
                     <label for="app_date" class="col-sm-2 col-form-label">App.Date <span class="required-sign">(*)</span></label>
                     <div class="col-sm-10">
-                        <input type="date" name="app_date"  class="form-control" id="app_date">
+                        <input type="text" name="app_date"  class="form-control" id="app_date">
                         <span class="error_message" id="app_date_error"></span>
                     </div>
                 </div>
