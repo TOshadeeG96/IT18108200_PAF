@@ -62,6 +62,20 @@ $(document).ready(function() {
 	
 });
 
+//NIC validation
+function checkNic() {
+	let nicLength = $("#nic").val().length;
+
+	if (nicLength == 10 || nicLength == 12) {
+		$("#nic_error").hide();
+		return true;
+	} else {
+		$("#nic_error").html("NIC should be 10 or 12 characters");
+		$("#nic_error").show();
+		return false;
+	}
+}
+
 
 	
 	// app_no is required field
