@@ -218,6 +218,8 @@ public static String AppoinmentList() {
 				output += "<td>" + app_time + "</td>";
 				output += "<td>" + reason + "</td>";
 				output += "<td>" + ref_doc + "</td>";
+				output += "<td><button type=\"button\" class=\"btn btn-primary\" id=\"updateButton\">Update</button></td>";
+				output += "<td><button type=\"button\" class=\"btn btn-danger\" id=\"removeButton\">Remove</button></td>";
 				
 				
 				output += "</tr>";
