@@ -23,8 +23,8 @@ public class Appointments_b {
 	private String reason;
 	private String ref_doc;
 	
-	public Appointments_b() {
-		
+	public Appointments_b(String app_no) {
+		this.app_no = app_no;
 	}
 	public Appointments_b(String app_no,String nic, String firstName, String lastName,String age, String gender, String app_date, String app_time,
 			String reason, String ref_doc) {
@@ -40,6 +40,8 @@ public class Appointments_b {
 		this.reason = reason;
 		this.ref_doc = ref_doc;
 	}
+	
+	
 	
 	public String getAppno() {
 		return app_no;
