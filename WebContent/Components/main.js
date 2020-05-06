@@ -85,7 +85,7 @@ $(document).on("click", "#add-button", function(event) {
 	});
 });
 	
-
+//update=================================
 $(document).on(
 		"click",
 		".btnUpdate",
@@ -104,6 +104,8 @@ $(document).on(
 			$("#ref_doc").val($(this).closest("tr").find('td:eq(9)').text());
 		});
 
+
+//===========update=======================================
 function onItemSaveComplete(response, status)
 {
 	if (status == "success")
@@ -152,7 +154,7 @@ $(document).on("click", ".btnRemove", function(event)
 			});
 		});
 
-//Delete
+//==============Delete==================================
 function onItemDeleteComplete(response, status)
 {
 	if (status == "success")
@@ -254,7 +256,7 @@ function validateItemForm()
 	
 	
 
-//NIC validation
+//===============NIC validation==============================
 function checkNic() {
 	let nicLength = $("#nic").val().length;
 
@@ -272,7 +274,7 @@ function checkNic() {
 
 $(function() {
     $('#add-button').bind('click', function(){
-	//let ageLength = $("#age").val().length;
+	
         var age =  $('#age').val(); //var age = parseInt($(this).val(), 10);
     if(age < 18 || age > 65) {
     	$("#age_error").hide();
@@ -283,10 +285,8 @@ $(function() {
     		$("#age_error").show();
     		return false;
     }
-        //alert("Wrong age!");
-    
-   //   else 
-});  //   	alert("valid age!");
+      
+});  
 
 //==========Date validation============    
 
