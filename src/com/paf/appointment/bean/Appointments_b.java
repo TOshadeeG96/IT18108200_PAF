@@ -9,23 +9,30 @@ public class Appointments_b {
 	private String gender;
 	private String age;
 	
-	public Appointments_b(String app_no, String nic, String app_date, String app_time, String reason, String ref_doc) {
-		super();
-		this.app_no = app_no;
-		this.nic = nic;
-		this.app_date = app_date;
-		this.app_time = app_time;
-		this.reason = reason;
-		this.ref_doc = ref_doc;
-	}
+//	public Appointments_b(String app_no, String nic, String app_date, String app_time, String reason, String ref_doc) {
+//		super();
+//		this.app_no = app_no;
+//		this.nic = nic;
+//		this.app_date = app_date;
+//		this.app_time = app_time;
+//		this.reason = reason;
+//		this.ref_doc = ref_doc;
+////	}
 	private String app_date;
 	private String app_time;
 	private String reason;
 	private String ref_doc;
 	
+	
+	public Appointments_b() {
+		
+	}
+	
 	public Appointments_b(String app_no) {
 		this.app_no = app_no;
 	}
+	
+	
 	public Appointments_b(String app_no,String nic, String firstName, String lastName,String age, String gender, String app_date, String app_time,
 			String reason, String ref_doc) {
 		

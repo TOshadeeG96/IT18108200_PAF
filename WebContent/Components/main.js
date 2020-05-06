@@ -1,4 +1,15 @@
-$(document).ready(function() { 
+$(document).ready(function() 
+		
+{ 
+	
+	if ($("#alertSuccess").text().trim() == "")
+	{
+		$("#alertSuccess").hide();
+	}
+	
+	$("#alertError").hide();
+	
+	
 	// hide area of error messages
 	$("#app_no_error").hide();
 	$("#nic_error").hide();
@@ -31,51 +42,217 @@ $(document).ready(function() {
 		vNic = checkNic();
 	});
 	
-//	//check number of characters for app_no
+	//check number of characters for app_no
 //	$("#app_date").focusout(function(){
 //		valDate = checkDate();
-///		
-//	});
+		
+	});
 	
 	//check number of characters for app_no
 	$("#age").focusout(function(){
 		valAge = checkAge();
 		
 	});
-	
-	
-	
-	
-	
-	
-	// check empty text fields
-	$(document).on("click", "#add-button", function(event) {
+//});	
 
-		let appnoStatus = appnoRequired();
-		let nicStatus = nicRequired();
-		let fNameStatus = fNameRequired();
-		let lNameStatus = lNameRequired();
-		let ageStatus = ageRequired();
-		let genderStatus = genderRequired();
-		let app_dateStatus = app_dateRequired();
-		let app_timeStatus = app_timeRequired();
-		let reasonStatus = reasonRequired();
-		let ref_docStatus = ref_docRequired();
+$(document).on("click", "#add-button", function(event) {
 
-		$("#appointments-form").submit(function() {
-			if (appnoStatus == false || nicStatus == false || fNameStatus == false || lNameStatus == false || ageStatus == false
-					|| genderStatus == false || app_dateStatus == false || app_timeStatus == false || reasonStatus == false || ref_docStatus == false) {
-				return false;
-			} else if(valAppNo == false || valNic == false) {
-				return false;
-			} else {
-				return true;
-			}
+	$("#alertSuccess").text("");
+	$("#alertSuccess").hide();
+	$("#alertError").text("");
+	$("#alertError").hide();
+
+
+	var status = validateItemForm();
+
+	if (status != true) {
+		$("#alertError").text(status);
+		$("#alertError").show();
+		return;
+	}
+
+	// If valid------------------------
+	var method = ($("#hidField").val() == "save") ? "POST" : "PUT";
+
+	$.ajax({
+		url : "AppointmentsAPI",
+		type : method,
+		data : $("#appointments-form").serialize(),
+		dataType : "text",
+		complete : function(response, status) {
+			onItemSaveComplete(response.responseText, status);
+		}
+	});
+});
+	
+
+$(document).on(
+		"click",
+		".btnUpdate",
+		function(event) {
+			$("#hidField").val(
+					$(this).closest("tr").find('#hidFieldUpdate').val());
+			$("#appno").val($(this).closest("tr").find('td:eq(0)').text());
+			$("#nic").val($(this).closest("tr").find('td:eq(1)').text());
+			$("#first-Name").val($(this).closest("tr").find('td:eq(2)').text());
+			$("#last-Name").val($(this).closest("tr").find('td:eq(3)').text());
+			$("#age").val($(this).closest("tr").find('td:eq(4)').text());
+		//	$("#genderMale").val($(this).closest("tr").find('td:eq(3)').text());
+			$("#app_date").val($(this).closest("tr").find('td:eq(6)').text());
+			$("#app_time").val($(this).closest("tr").find('td:eq(7)').text());
+			$("#reason").val($(this).closest("tr").find('td:eq(8)').text());
+			$("#ref_doc").val($(this).closest("tr").find('td:eq(9)').text());
 		});
 
-	});
+function onItemSaveComplete(response, status)
+{
+	if (status == "success")
+	{
+		var resultSet = JSON.parse(response);
+		if (resultSet.status.trim() == "success")
+		{
+			$("#alertSuccess").text("Successfully saved.");
+			$("#alertSuccess").show();
+			$("#divItemsGrid").html(resultSet.data);
+		} 
+		else if (resultSet.status.trim() == "error")
+		{
+			$("#alertError").text(resultSet.data);
+			$("#alertError").show();
+		}
+	} 
+	else if (status == "error")
+	{
+		$("#alertError").text("Error while saving.");
+		$("#alertError").show();
+	} 
+	else
+	{
+		$("#alertError").text("Unknown error while saving..");
+		$("#alertError").show();
+	}
 	
-});
+	$("#hidField").val("save");
+	$("#appointments-form")[0].reset();
+}
+
+//----------------Deleting appointments--------------------------
+$(document).on("click", ".btnRemove", function(event)
+		{
+			$.ajax(
+			{
+				url : "AppointmentsAPI",
+				type : "DELETE",
+				data : "app_no=" + $(this).data("app_no"),
+				dataType : "text",
+				complete : function(response, status)
+				{
+					onItemDeleteComplete(response.responseText, status);
+				}
+			});
+		});
+
+//Delete
+function onItemDeleteComplete(response, status)
+{
+	if (status == "success")
+	{
+		var resultSet = JSON.parse(response);
+		
+		if (resultSet.status.trim() == "success")
+		{
+			$("#alertSuccess").text("Successfully deleted.");
+			$("#alertSuccess").show();
+			$("#divItemsGrid").html(resultSet.data);
+		} 
+		else if (resultSet.status.trim() == "error")
+		{
+			$("#alertError").text(resultSet.data);
+			$("#alertError").show();
+		}
+	} 
+	else if (status == "error")
+	{
+		$("#alertError").text("Error while deleting.");
+		$("#alertError").show();
+	} 
+	else
+	{
+		$("#alertError").text("Unknown error while deleting..");
+		$("#alertError").show();
+	}
+}
+
+
+
+
+	
+
+
+
+//==============Validation=====================
+function validateItemForm()
+{
+	//app_no is required
+	if ($("#appno").val().trim() == "")
+	{
+		return "Insert App Number.";
+	}
+	
+	
+	// nic is required
+	if ($("#nic").val().trim() == "")
+	{
+		return "Insert NIC.";
+	}
+	
+	// first name is required
+	if ($("#first-name").val().trim() == "")
+	{
+		return "Insert First Name.";
+	}
+	
+	// last name is required
+	if ($("#last-name").val().trim() == "")
+	{
+		return "Insert Last Name.";
+	}
+	
+	// age is required
+	if ($("#age").val().trim() == "")
+	{
+		return "Insert Age.";
+	}
+	
+	// app_date is required
+	if ($("#app_date").val().trim() == "")
+	{
+		return "Insert Appointment date.";
+	}
+	
+	// app_time is required
+	if ($("#app_time").val().trim() == "")
+	{
+		return "Insert Appointment time.";
+	}
+	
+	// reason is required
+	if ($("#reason").val().trim() == "")
+	{
+		return "Insert Reason.";
+	}
+	
+	// ref_doc is required
+	if ($("#ref_doc").val().trim() == "")
+	{
+		return "Insert Doctor.";
+	}
+	
+	return true;
+}
+	
+	
+	
 
 //NIC validation
 function checkNic() {
@@ -158,95 +335,7 @@ function isDate(txtDate)
 
 
 	
-//=============app_no is required field==============
-	function appnoRequired() {
-		if ($("#appno").val().trim() == "") {
-			$("#app_no_error").html("This field is required");
-			$("#app_no_error").show();
-			return false;
-		}
-	}
-	
-// ==============nic is required field=================
-	function nicRequired() {
-		if ($("#nic").val().trim() == "") {
-			$("#nic_error").html("This field is required");
-			$("#nic_error").show();
-			return false;
-		}
-	}
 
-//========= first name is required field================
-	function fNameRequired() {
-		if ($("#first-Name").val().trim() == "") {
-			$("#fName_error").html("This field is required");
-			$("#fName_error").show();
-			return false;
-		}
-	}
-
-	// last name is required field
-	function sNameRequired() {
-		if ($("#last-name").val().trim() == "") {
-			$("#lName_error").html("This field is required");
-			$("#lName_error").show();
-			return false;
-		}
-	}
-
-	// age is required field
-	function dobRequired() {
-		if ($("#age").val().trim() == "") {
-			$("#age_error").html("This field is required");
-			$("#age_error").show();
-			return false;
-		}
-	}
-
-	// gender is required field
-	function genderRequied() {
-		if ($('input[name="gender"]:checked').length === 0) {
-			$("#gender_error").html("This field is required");
-			$("#gender_error").show();
-			return false;
-		}
-	}
-	
-	// app_date is required field
-	function app_dateRequired() {
-		if ($("#app_date").val().trim() == "") {
-			$("#app_date_error").html("This field is required");
-			$("#app_date_error").show();
-			return false;
-		}
-	}
-	
-	// app_time is required field
-	function app_timeRequired() {
-		if ($("#app_time").val().trim() == "") {
-			$("#app_time_error").html("This field is required");
-			$("#app_time_error").show();
-			return false;
-		}
-	}
-	
-	// reason is required field
-	function reasonRequired() {
-		if ($("#reason").val().trim() == "") {
-			$("#reason_error").html("This field is required");
-			$("#reason_error").show();
-			return false;
-		}
-	}
-	
-	// ref_doc is required field
-	function ref_docRequired() {
-		if ($("#ref_doc").val().trim() == "") {
-			$("#ref_doc_error").html("This field is required");
-			$("#ref_doc_error").show();
-			return false;
-		}
-	}
 	
 });
 

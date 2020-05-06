@@ -49,7 +49,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
                 <span>Appoinments</span>
             </h3>
 
-            <form id="appointments-form" action="EnterAppointments.jsp">
+            <form id="appointments-form" name="appointments-form" method="post" action="EnterAppointments.jsp">
             
             <div class="form-group row">
                     <label for="app_no" class="col-sm-2 col-form-label">App.No <span class="required-sign">(*)</span></label>
@@ -135,28 +135,45 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
                         <span class="error_message" id="refd_error"></span>
                     </div>
                 </div>
+                
+                 <!-- hidden field -->
+                <input type="hidden" id="hidField" name="hidField" value="save">
+                
+                
                 <div class="form-group row">
                     <div class="col-sm-10">
-                      
-                      <button type="submit" class="btn btn-success" id="add-button">Add Appoinments</button>
+                       <button type="submit" class="btn btnUpdate btn-success" id="add-button">Add Appointments</button>
                     </div>
                 </div>
             </form>
-            <div class="alert alert-success">
-            	<%
-            		if(session.getAttribute("patient_addAppoinment_status") != null) {
-            			out.print(session.getAttribute("patient_addAppoinment_status"));
-            		}
-            	%>
-            </div>  
+            
         </fieldset>
+        
+        
+             
+       
     </div>
+    
+    <hr>
     
     <div class="container-fluid">
-    <h3>Appointment Details</h3>
-    <%=Appointments.AppoinmentList() %>
-    
+    <div class="row">
+		
+			<!-- Table -->
+			<div class="col-sm-9" id="#divItemsGrid">
+    		<h3>Appointment Details</h3>
+   	 		<%=Appointments.AppoinmentList() %>
+    	
     </div>
+    
+    <!-- Status -->
+			<div class="col-sm-3">
+				<div id="alertSuccess" class="alert alert-success alertArea"></div>
+				<div id="alertError" class="alert alert-danger alertArea"></div>
+			</div>
+			
+		</div>
+	</div>
     
 
 </body>

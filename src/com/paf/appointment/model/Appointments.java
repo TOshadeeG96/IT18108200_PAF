@@ -60,13 +60,14 @@ public static Connection getConnection( ) {
 		
 		ps.executeUpdate();
 		
-		output = "Add Appoinment Successfully";
+		String newItems = AppoinmentList();
+		output = "{\"status\":\"success\", \"data\": \"" + newItems + "\"}";
 		
 	} catch (Exception e) {
+		output = "{\"status\":\"error\", \"data\": \"Error while inserting the item.\"}";
 		e.printStackTrace();
-		
-		output = "Error in adding appoinment process";
 	}
+	
 	
 	return output;
 	
@@ -137,11 +138,13 @@ public static Connection getConnection( ) {
 
 			ps.executeUpdate();
 			
-			status = "Appoinment Update Successfully";
+			String newItems = AppoinmentList();
+			status = "{\"status\":\"success\", \"data\": \"" + newItems + "\"}";
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-		status = "Error in update process";
-		}		
+			status = "{\"status\":\"error\", \"data\": \"Error in update process.\"}";
+		}	
 		return status;
 	
 	
@@ -165,11 +168,13 @@ public static Connection getConnection( ) {
 			
 			ps.execute();
 			
-			status = "Appoinment deleted successfuly";
+			String newItems = AppoinmentList();
+			status = "{\"status\":\"success\", \"data\": \"" + newItems + "\"}";
+			
 		} catch (Exception e) {
 			// TODO: handle exception
+			status = "{\"status\":\"error\", \"data\": \"Error in deleting process.\"}";
 			e.printStackTrace();
-			status = "Error in deleting process.";
 		}
 		
 		return status;
@@ -189,7 +194,7 @@ public static String AppoinmentList() {
 					"</head>" + 
 					"<body>" +
 					"<table border=\"1\"><tr><th>App.No</th>" + "<th>NIC</th><th>First Name</th>" + "<th>Last Name</th>" +
-					"<th>Age</th>" + "<th>Gender</th>" + "<th>App.Date</th>" + "<th>App.Time</th>" + "<th>Reason</th>" + "<th>Ref.Doc</th>" +
+					"<th>Age</th>" + "<th>Gender</th>" + "<th>App.Date</th>" + "<th>App.Time</th>" + "<th>Reason</th>" + "<th>Ref.Doc</th>" + "<th>Update</th>" + "<th>Delete</th>" +					
 					"</body>";
 			
 			String query = "select * from patient_appoinment";
@@ -208,7 +213,7 @@ public static String AppoinmentList() {
 				String reason = rs.getString("reason");
 				String ref_doc = rs.getString("ref_doc");
 				
-				output +="<tr><td>" + app_no + "</td>";
+				output += "<tr><td><input id='hidFieldUpdate' name='hidFieldUpdate' type='hidden' value='" + app_no + "'>" + app_no + "</td>";
 				output += "<td>" + nic + "</td>";
 				output += "<td>" + firstName + "</td>";
 				output += "<td>" + lastName + "</td>";
@@ -218,15 +223,18 @@ public static String AppoinmentList() {
 				output += "<td>" + app_time + "</td>";
 				output += "<td>" + reason + "</td>";
 				output += "<td>" + ref_doc + "</td>";
-				output += "<td><button type=\"button\" class=\"btn btn-primary\" id=\"updateButton\">Update</button></td>";
-				output += "<td><button type=\"button\" class=\"btn btn-danger\" id=\"removeButton\">Remove</button></td>";
+				
+				
+				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-primary'></td>";
+				output += "<td>"
+						+ "<input name='btnDelete' type='button' value='Delete' class='btn btn-danger btnRemove' data-app_no='" + app_no + "'></td>";
 				
 				
 				output += "</tr>";
-						
 			}
 		}catch (Exception e) {
 			// TODO: handle exception
+			String status = "{\"status\":\"error\", \"data\": \"Error in insertingnnnnnnnn process.\"}";
 			e.printStackTrace();
 		}
 		

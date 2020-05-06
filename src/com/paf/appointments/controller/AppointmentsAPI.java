@@ -64,9 +64,9 @@ public class AppointmentsAPI extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
 		
-		System.out.println("----------------");
+		
+		
 		
 		String app_no = request.getParameter("app_no");
 		String nic = request.getParameter("nic");

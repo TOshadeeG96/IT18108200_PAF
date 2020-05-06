@@ -63,9 +63,9 @@ public class AppointmentService {
 			String status = null;
 			
 			
-			Appointments_b app = new Appointments_b(app_no, patientNic, app_date, app_time, reason, doctorNic);
+	//		Appointments_b app = new Appointments_b(app_no, patientNic, app_date, app_time, reason, doctorNic);
 			
-			status = Appointments.addAppoinment2(app);
+//			status = Appointments.addAppoinment2(app);
 			
 			return status;
 		}
